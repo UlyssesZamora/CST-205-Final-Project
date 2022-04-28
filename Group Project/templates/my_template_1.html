@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {{ bootstrap.load_css() }}
+    <title> CST 205 Homework 4</title>
+</head>
+
+<body>
+    {% for i in range(0, image_info|length) %}
+        {% if image_info[i]['id'] == image_id %}
+            <h1> {{image_info[i]['title']}} by {{image_info[i]['flickr_user']}}</h1>
+            <img src="/static/images/{{image_info[i]['id']}}.jpg" height="im.height" width="im.width" class="img-fluid rounded"/>
+            <br> <br>
+            {{im.mode}} image in JPEG format with width {{im.width}} and height {{im.height}}
+            <br> <br>
+            <a href="/"> Back to list of images </a>
+        {% endif%}
+    {% endfor %}
+</body>
+
+</html>
