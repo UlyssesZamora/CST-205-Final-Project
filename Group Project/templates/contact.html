@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {{ bootstrap.load_css() }}
+    <link rel="stylesheet" href="{{ url_for('static', filename='/css/contact.css') }}">
+    <title>Contact Page</title>
+</head>
+<body>
+
+    <video autoplay muted loop id="myVideo">
+        <source src="/static/images/expolre.mp4" type="video/mp4">
+        </video>
+
+    <header>
+
+        <a href="{{ url_for('hello') }}">
+            <img class="logo" src="/static/images/otter.png">
+        </a>
+        <form method="POST" action="/">
+            {{ form.csrf_token }}
+            <!-- {{ form.city_name.label }}  -->
+            {{ form.city_name(size=32, id="test", placeholder="Search for a City") }}
+            {{ form.submit(class="btn btn-secondary", id="citySearch")}}
+          </form>
+
+        <nav>
+            <ul class="navLinks">
+                <li> <a href="{{ url_for('displayImages', city_images = cities[-1]['cities']) }}"> City Pictures </a> </li>
+                <li> <a href="{{ url_for('page2', entered_city = cities[-1]['cities']) }}"> 4 Day Forecast </a> </li>
+            </ul>
+        </nav>
+
+        <a class="cta" href="{{ url_for('contact') }}"> <button> Contact </button> </a>
+    </header>
+
+    <div class="card" id="temp">
+
+        <h4 id="prompt"> Send a Message to us </h4> <br> <br>
+        <textarea name="" id="contactArea" placeholder="Problems or Concerns"></textarea> <br>
+        <div id="checkImg"> </div>
+        <button class="btn btn-secondary" onclick="confirmFunc()" id="buttonRemove"> Send </button>
+    </div>
+
+    <script>
+
+        function confirmFunc() {
+            document.getElementById("prompt").innerHTML = "Message Sent, Thank You!"
+            document.getElementById("contactArea").remove();
+            document.getElementById("checkImg").innerHTML = "<img width='100' height='100' src=/static/images/check.png>"
+            document.getElementById("buttonRemove").remove();
+        }
+    </script>
+    
+</body>
+</html>
