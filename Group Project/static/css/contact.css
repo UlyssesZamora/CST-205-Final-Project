@@ -70,25 +70,6 @@ button:hover {
     z-index: -1;
 }
 
-/* #mainScreenCard {
-    margin: 0;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-}
-
-.row {
-    top: 20%;
-    display: flex;
-}
-
-.card {
-    flex: 20%;
-    padding: 5px;
-    border-color: black;
-} */
-
 #test {
     border-radius: 50px;
     border-color: gray;
@@ -117,53 +98,14 @@ button:hover {
 }
 
 h4 {
-    letter-spacing: 4px;
-    font-weight: 600;
-    font-size: 18px;
     text-align: center;
-    margin: 25px 0 10px 0;
 }
 
-h6 {
-    text-align: center;
-    color: black;
-    font-size: 15px;
-    letter-spacing: 5px;
-    font-weight: 300;
-    margin-bottom: 25px;
+#contactArea {
+    height: 200px;
 }
 
-.card img {
-    width: 22%;
-    margin-left: 39%;
-}
-
-h1 {
-    letter-spacing: 2px;
-    text-align: center;
-    font-size: 50px;
-    font-weight: 300;
-}
-
-.container {
-    width: 70%;
-    margin-left: 15%;
-    display: grid;
-    grid-template-columns: auto auto;
-    margin-top: 30px;
-}
-
-.details {
-    text-align: center;
-    font-size: 13px;
-    letter-spacing: 1px;
-    font-weight: 600;
-}
-
-.details span {
-    color: black;
-}
-
-.details:first-child {
-    border-right: 2px solid #fcfcfc;
+#checkImg {
+    display: flex;
+    justify-content: center;
 }

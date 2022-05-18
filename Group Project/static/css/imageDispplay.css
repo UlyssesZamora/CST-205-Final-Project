@@ -1,0 +1,96 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap');
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+li, a, button {
+    font-family: "Montserrat", sans-serif;
+    font-weight: 500;
+    font-size: 16px;
+    color: #ECF0F1;
+    text-decoration: none;
+}
+
+.logo {
+    width: 75px;
+    height: 75px;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 30px 10%;
+    background-color: #24242A;
+}
+
+.navLinks {
+    list-style: none;
+}
+
+.navLinks li {
+    display: inline-block;
+    padding: 0px 20px;
+}
+
+.navLinks li a {
+    transition: all 0.3 ease 0s;
+
+}
+
+.navLinks li a:hover{
+    transition: all 0.3 ease 0s;
+    color: #0088A9;
+    text-decoration: none;
+}
+
+button {
+    padding: 9px 25px;
+    background-color: rgba(0, 136, 169, 1);
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3 ease 0s;
+    margin-top: -15px;
+}
+
+button:hover {
+    background-color: rgba(0, 136, 169, 0.8);
+}
+
+#myVideo {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    min-width: 100%;
+    min-height: 100%;
+    z-index: -1;
+}
+
+#test {
+    border-radius: 50px;
+    border-color: gray;
+}
+
+#citySearch {
+    border-radius: 50px;
+}
+
+.mySlides {
+    width: 400px;
+    height: 400px;
+}
+.imgSlideShow {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding-top: 90px;
+    color: white;
+    font-size: 15pt;
+    text-align: center;
+}
