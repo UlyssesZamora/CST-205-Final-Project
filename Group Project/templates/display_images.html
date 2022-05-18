@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {{ bootstrap.load_css() }}
+    <link rel="stylesheet" href="{{ url_for('static', filename='/css/imageDispplay.css') }}">
+    <title> Images </title>
+</head>
+<body>
+
+    <video autoplay muted loop id="myVideo">
+        <source src="/static/images/expolre.mp4" type="video/mp4">
+        </video>
+
+    <header>
+
+        <a href="{{ url_for('hello') }}">
+            <img class="logo" src="/static/images/otter.png">
+        </a>
+        <form method="POST" action="/">
+            {{ form.csrf_token }}
+            {{ form.city_name(size=32, id="test", placeholder="Search for a City") }}
+            {{ form.submit(class="btn btn-secondary", id="citySearch")}}
+          </form>
+
+        <nav>
+            <ul class="navLinks">
+                <li> <a href="{{ url_for('displayImages', city_images = city_images) }}"> City Pictures </a> </li>
+                <li> <a href="{{ url_for('page2', entered_city = cities[-1]['cities']) }}"> 4 Day Forecast </a> </li>
+            </ul>
+        </nav>
+
+        <a class="cta" href="{{ url_for('contact') }}"> <button> Contact </button> </a>
+    </header>
+
+    {#Reference for slideshow: https://www.w3schools.com/w3css/w3css_slideshow.asp#}
+    <div class="imgSlideShow">
+
+        Photos of {{city_images}}
+
+        <img class="mySlides" src="{{response['hits'][0]['webformatURL']}}">
+        <img class="mySlides" src="{{response['hits'][1]['webformatURL']}}">
+        <img class="mySlides" src="{{response['hits'][2]['webformatURL']}}">
+        <img class="mySlides" src="{{response['hits'][3]['webformatURL']}}">
+        <img class="mySlides" src="{{response['hits'][4]['webformatURL']}}">
+
+        <button class="left" onclick="plusDivs(-1)">&#10094;</button>
+        <button class="right" onclick="plusDivs(1)">&#10095;</button>
+
+
+    </div>
+
+
+    <script>
+        var slideIndex = 1;
+        showDivs(slideIndex);
+        
+        function plusDivs(n) {
+          showDivs(slideIndex += n);
+        }
+        
+        function showDivs(n) {
+          var i;
+          var x = document.getElementsByClassName("mySlides");
+          if (n > x.length) {slideIndex = 1}
+          if (n < 1) {slideIndex = x.length}
+          for (i = 0; i < x.length; i++) {
+            x[i].style.display = "none";  
+          }
+          x[slideIndex-1].style.display = "block";  
+        }
+        </script>
+    
+</body>
+</html>

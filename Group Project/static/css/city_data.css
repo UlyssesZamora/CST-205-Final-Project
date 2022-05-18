@@ -70,25 +70,6 @@ button:hover {
     z-index: -1;
 }
 
-/* #mainScreenCard {
-    margin: 0;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-}
-
-.row {
-    top: 20%;
-    display: flex;
-}
-
-.card {
-    flex: 20%;
-    padding: 5px;
-    border-color: black;
-} */
-
 #test {
     border-radius: 50px;
     border-color: gray;
@@ -102,8 +83,8 @@ button:hover {
     height: 360px;
     width: 360px;
     background-color: rgba(255, 255, 255, 0.6);
-    position: absolute;
-    margin: auto;
+    /* position: absolute; */
+    margin: 10px;
     left: 0;
     right: 0;
     top: 0;
@@ -166,4 +147,9 @@ h1 {
 
 .details:first-child {
     border-right: 2px solid #fcfcfc;
+}
+
+.cardFlex {
+    display: flex;
+    margin: 100px;
 }

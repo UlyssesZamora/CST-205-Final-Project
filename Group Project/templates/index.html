@@ -7,25 +7,60 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
     {{ bootstrap.load_css() }}
     <link rel="stylesheet" href="{{ url_for('static', filename='/css/main.css') }}">
-    <title>CST 205 Homework 4</title>
+    <title>CST 205 Project</title>
 </head>
 
 <body>
+    <video autoplay muted loop id="myVideo">
+    <source src="/static/images/expolre.mp4" type="video/mp4">
+    </video>
+<!-- 
+    <header class = "bg-dark p-2 text-center text-white">
+        <h1 id="title"> CST 205 Weather Application </h1>
+        <br> <br>
+    </header> -->
 
-    <h1> CST 205 Weather App </h1>
-    <br>
+    <header>
 
-<video autoplay muted loop id="myVideo">
-  <source src="/static/images/expolre.mp4" type="video/mp4">
-</video>
+        <a href="{{ url_for('hello') }}">
+            <img class="logo" src="/static/images/otter.png">
+        </a>
 
-    <div class="card" style="width: 18rem;">
-        <div class="card-body">
-          <h5 class="card-title"> Enter a City Name </h5>
-          <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-          <a href="#" class="btn btn-primary">Go somewhere</a>
+        <form method="POST" action="/">
+            {{ form.csrf_token }}
+            <!-- {{ form.city_name.label }}  -->
+            {{ form.city_name(size=32, id="test", placeholder="Search for a City") }}
+            {{ form.submit(class="btn btn-secondary", id="citySearch")}}
+          </form>
+
+        <nav>
+            <ul class="navLinks">
+                <li> <a href="{{ url_for('displayImages', city_images = cities[-1]['cities']) }}"> City Pictures </a> </li>
+                <li> <a href="{{ url_for('page2', entered_city = cities[-1]['cities']) }}"> 4 Day Forecast </a> </li>
+            </ul>
+        </nav>
+
+        <a class="cta" href="{{ url_for('contact') }}"> <button> Contact </button> </a>
+    </header>
+
+    {# Link for reference for the weather cards: 
+    https://www.youtube.com/watch?v=D97Kq3uZUeM&list=LL&index=1&ab_channel=CodingArtist css included#}
+    <div class="card">
+        <h4> {{ cities[-1]['cities'] }} </h4>
+        <h6> {{response.json()['current']['weather'][0]['description']}} </h6>
+        <img src="/static/images/sun.png">
+        <h1> {{ response.json()['current']['feels_like'] }} F </h1>
+        <div class="container">
+            <div class="details">
+                <p> Max </p>
+                <span> {{response.json()['daily'][0]['temp']['max']}} F </span>
+            </div>
+            <div class="details">
+                <p> Min </p>
+                <span> {{response.json()['daily'][0]['temp']['min']}} F </span>
+            </div>
         </div>
-      </div>
+    </div>
 </body>
 
 </html>

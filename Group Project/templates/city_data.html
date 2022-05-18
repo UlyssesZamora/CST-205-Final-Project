@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {{ bootstrap.load_css() }}
+    <link rel="stylesheet" href="{{ url_for('static', filename='/css/city_data.css') }}">
+    <title> CST 205 Homework 4</title>
+</head>
+<body>
+
+    <video autoplay muted loop id="myVideo">
+        <source src="/static/images/expolre.mp4" type="video/mp4">
+        </video>
+
+    <header>
+
+        <a href="{{ url_for('hello') }}">
+            <img class="logo" src="/static/images/otter.png">
+        </a>
+        <form method="POST" action="/">
+            {{ form.csrf_token }}
+            <!-- {{ form.city_name.label }}  -->
+            {{ form.city_name(size=32, id="test", placeholder="Search for a City") }}
+            {{ form.submit(class="btn btn-secondary", id="citySearch")}}
+          </form>
+
+        <nav>
+            <ul class="navLinks">
+                <li> <a href="{{ url_for('displayImages', city_images = entered_city) }}"> City Pictures </a> </li>
+                <li> <a href="{{ url_for('page2', entered_city = entered_city) }}"> 4 Day Forecast </a> </li>
+            </ul>
+        </nav>
+
+        <a class="cta" href="{{ url_for('contact') }}"> <button> Contact </button> </a>
+    </header>
+
+
+    {# Link for reference for the weather cards: 
+    https://www.youtube.com/watch?v=D97Kq3uZUeM&list=LL&index=1&ab_channel=CodingArtist css included#}
+    <div class="cardFlex">
+
+        <div class="card">
+            <h4> {{ cities[-1]['cities'] }} {{base.month}}/{{base.day}} </h4>
+            <h6> {{response.json()['current']['weather'][0]['description']}} </h6>
+            <img src="/static/images/sun.png">
+            <h1> {{ response.json()['current']['feels_like'] }} F </h1>
+            <div class="container">
+                <div class="details">
+                    <p> Max </p>
+                    <span> {{response.json()['daily'][0]['temp']['max']}} F </span>
+                </div>
+                <div class="details">
+                    <p> Min </p>
+                    <span> {{response.json()['daily'][0]['temp']['min']}} F </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h4> {{ cities[-1]['cities'] }} {{base.month}}/{{base.day + 1}}</h4>
+            <h6> {{response.json()['daily'][1]['weather'][0]['description']}} </h6>
+            <img src="/static/images/sun.png">
+            <h1> {{ response.json()['daily'][1]['feels_like']['day'] }} F </h1>
+            <div class="container">
+                <div class="details">
+                    <p> Max </p>
+                    <span> {{response.json()['daily'][1]['temp']['max']}} F </span>
+                </div>
+                <div class="details">
+                    <p> Min </p>
+                    <span> {{response.json()['daily'][1]['temp']['min']}} F </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h4> {{ cities[-1]['cities'] }} {{base.month}}/{{base.day + 2}}</h4>
+            <h6> {{response.json()['daily'][2]['weather'][0]['description']}} </h6>
+            <img src="/static/images/sun.png">
+            <h1> {{ response.json()['daily'][2]['feels_like']['day'] }} F </h1>
+            <div class="container">
+                <div class="details">
+                    <p> Max </p>
+                    <span> {{response.json()['daily'][2]['temp']['max']}} F </span>
+                </div>
+                <div class="details">
+                    <p> Min </p>
+                    <span> {{response.json()['daily'][2]['temp']['min']}} F </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h4> {{ cities[-1]['cities'] }} {{base.month}}/{{base.day + 3}} </h4>
+            <h6> {{response.json()['daily'][3]['weather'][0]['description']}} </h6>
+            <img src="/static/images/sun.png">
+            <h1> {{ response.json()['daily'][3]['feels_like']['day'] }} F </h1>
+            <div class="container">
+                <div class="details">
+                    <p> Max </p>
+                    <span> {{response.json()['daily'][3]['temp']['max']}} F </span>
+                </div>
+                <div class="details">
+                    <p> Min </p>
+                    <span> {{response.json()['daily'][3]['temp']['min']}} F </span>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+{#
+    <div class="row">
+        <div class="card" style="width: 18rem;">
+            <img class="card-img-top" src="/static/images/sky.jpeg" alt="Card image cap">
+            <div class="card-body">
+            <h5 class="card-title"> Weather for {{base.month}}/{{base.day}}</h5>
+            <p class="card-text"> Current Temperature: {{response[0]['temp']['day']}} F</p>
+            <p class="card-text"> Wind Speed: {{response[0]['speed']}} MPH</p>
+            <p class="card-text"> Sky: {{response[0]['weather'][0]['description']}}</p>
+            <a href=" {{ url_for('hello') }} " class="btn btn-primary"> Back Home</a>
+            </div>
+        </div>
+
+        <div class="card" style="width: 18rem;">
+            <img class="card-img-top" src="/static/images/sky.jpeg" alt="Card image cap">
+            <div class="card-body">
+            <h5 class="card-title"> Weather for {{base.month}}/{{base.day + 1}}</h5>
+            <p class="card-text"> Current Temperature: {{response[1]['temp']['day']}} F</p>
+            <p class="card-text"> Wind Speed: {{response[1]['speed']}} MPH</p>
+            <p class="card-text"> Sky: {{response[1]['weather'][0]['description']}}</p>
+            <a href=" {{ url_for('hello') }} " class="btn btn-primary"> Back Home</a>
+            </div>
+        </div>
+
+        <div class="card" style="width: 18rem;">
+            <img class="card-img-top" src="/static/images/sky.jpeg" alt="Card image cap">
+            <div class="card-body">
+            <h5 class="card-title"> Weather for {{base.month}}/{{base.day + 2}}</h5>
+            <p class="card-text"> Current Temperature: {{response[2]['temp']['day']}} F</p>
+            <p class="card-text"> Wind Speed: {{response[2]['speed']}} MPH</p>
+            <p class="card-text"> Sky: {{response[2]['weather'][0]['description']}}</p>
+            <a href=" {{ url_for('hello') }} " class="btn btn-primary"> Back Home</a>
+            </div>
+        </div>
+
+        <div class="card" style="width: 18rem;">
+            <img class="card-img-top" src="/static/images/sky.jpeg" alt="Card image cap">
+            <div class="card-body">
+            <h5 class="card-title"> Weather for {{base.month}}/{{base.day + 3}}</h5>
+            <p class="card-text"> Current Temperature: {{response[3]['temp']['day']}} F</p>
+            <p class="card-text"> Wind Speed: {{response[3]['speed']}} MPH</p>
+            <p class="card-text"> Sky: {{response[3]['weather'][0]['description']}}</p>
+            <a href=" {{ url_for('hello') }} " class="btn btn-primary"> Back Home</a>
+            </div>
+        </div>
+    </div>
+
+#}
+
+    
+
+      
+
+</body>
+
+</html>
